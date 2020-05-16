@@ -4,10 +4,22 @@ $("button").click(function(){
     word_count = prompt("Enter word count:");
 });
 
-//var keyword = prompt("Enter: Hangman word");
-//var len = keyword.length;
-//var lives = 7
-//console.log(len)
+const getPuzzle = async (wordCount) => {
+    const response = await fetch(`https://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+    
+    if (response.status === 200) {
+        const data  = await response.json()
+        return data.puzzle
+    } else {
+        throw new Error('Unable to fetch puzzle')
+    }
+}
+
+var puzzleWords = getPuzzle(word_count);
+var len = puzzleWords.length
+console.log(len)
+console.log(puzzleWords)
+
 
 for (i = 0; i < len; i++) {
     $('body').append("<div class='div'></div>").css('color', 'black');
