@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var keyword = prompt("Enter: Hangman word");
 var len = keyword.length;
 var lives = 7
@@ -30,3 +31,18 @@ $('body').keypress(function(event){
 
 
 
+=======
+// This is the container for the actual game itself. 
+// In other words, this is where we set up the interface and read
+// user inputs/interactions. 
+
+const gameElement = document.querySelector('#main-game')
+
+const render = () => {
+    // render a blank game to the gameElement
+    gameElement.textContent = ''
+    
+    // display the puzzle letter by letter
+    //  
+}
+>>>>>>> 78ef7b6a0aec69a6ab2ff43379052cae9dcb748a
