@@ -9,16 +9,18 @@ const getPuzzle = async (wordCount) => {
     
     if (response.status === 200) {
         const data  = await response.json()
+        console.log(data.puzzle)
         return data.puzzle
     } else {
         throw new Error('Unable to fetch puzzle')
     }
 }
 
-var puzzleWords = getPuzzle(word_count);
+var puzzleWords = getPuzzle(word_count)
+console.log(puzzleWords)
 var len = puzzleWords.length
 console.log(len)
-console.log(puzzleWords)
+
 
 
 for (i = 0; i < len; i++) {
