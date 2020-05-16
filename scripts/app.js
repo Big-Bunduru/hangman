@@ -1,6 +1,12 @@
-var keyword = prompt("Enter: Hangman word");
-var len = keyword.length;
-var lives = 7
+var word_count;
+
+$("button").click(function(){
+    word_count = prompt("Enter word count:");
+});
+
+//var keyword = prompt("Enter: Hangman word");
+//var len = keyword.length;
+//var lives = 7
 //console.log(len)
 
 for (i = 0; i < len; i++) {
