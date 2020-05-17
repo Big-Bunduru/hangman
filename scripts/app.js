@@ -28,7 +28,26 @@ const render = async (wordCount) => {
                 //console.log(keyword.charCodeAt(i))
             }
             return len
+        }).then(() => {
+            $('body').keypress(function(event){ 
+                var success = false
+                //console.log(event.keyCode)
+                if (lives > 0) {
+                    for (i = 0; i < len; i++) {
+                        if(event.keyCode == keyword.charCodeAt(i)){
+                            $("body").find("div").eq(i).text(keyword[i])
+                            success = true
+                        }
+                        //console.log(keyword.charCodeAt(i))
+                    }
+                    if (!success) {
+                        lives--
+                        $("header").text("Lives remaining: " + lives)
+                    }
+                }
+             })
         })
+
     console.log(puzzle)
 
     var lives = 7
