@@ -1,46 +1,49 @@
-const wordCount = '5'
+var word_count = prompt("Enter word count:")
 
 const getPuzzle = async (wordCount) => {
     const response = await fetch(`//puzzle.mead.io/puzzle?wordCount=${wordCount}`)
     
     if (response.status === 200) {
         const puzzle  = await response.json()
+        console.log(puzzle.puzzle)
         return puzzle.puzzle
     } else {
         throw new Error('Unable to fetch puzzle')
     }
 }
 
-const puzzle = getPuzzle(wordCount)
+const render = async (wordCount) => {
+    const puzzle = getPuzzle(wordCount)
+    var len = puzzle.length
+    console.log(len)
+    var lives = 7
 
-var len = puzzle.length
-var lives = 7
-console.log(len)
-
-for (i = 0; i < len; i++) {
-    $('body').append("<div class='div'></div>").css('color', 'black');
-    //console.log(keyword[i])
-    //console.log(keyword.charCodeAt(i))
+    for (i = 0; i < len; i++) {
+        $('body').append("<div class='div'></div>").css('color', 'black')
+        //console.log(keyword[i])
+        //console.log(keyword.charCodeAt(i))
+    }
+    
+    $('body').keypress(function(event){ 
+        var success = false
+        //console.log(event.keyCode)
+        if (lives > 0) {
+            for (i = 0; i < len; i++) {
+                if(event.keyCode == keyword.charCodeAt(i)){
+                    $("body").find("div").eq(i).text(keyword[i])
+                    success = true
+                }
+                //console.log(keyword.charCodeAt(i))
+            }
+            if (!success) {
+                lives--
+                $("header").text("Lives remaining: " + lives)
+            }
+        }
+     })
 }
 
-
-$('body').keypress(function(event){ 
-    var success = false;
-    //console.log(event.keyCode)
-    if (lives > 0) {
-        for (i = 0; i < len; i++) {
-            if(event.keyCode == keyword.charCodeAt(i)){
-                $("body").find("div").eq(i).text(keyword[i]);
-                success = true;
-            }
-            //console.log(keyword.charCodeAt(i))
-        }
-        if (!success) {
-            lives--;
-            $("header").text("Lives remaining: " + lives);
-        }
-    }
- })
+render(word_count)
 
 
 
