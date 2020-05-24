@@ -11,16 +11,19 @@ function game() {
             const words = puzzleString.split(' ')
             const wordArray = Array.from(puzzleString)
             console.log(words)
+            console.log(words.length)
             for (i = 0; i < words.length; i++) {
-                $('#main-game').append(`"<div class='word' id='word${i}'>"`)
+                $('#main-game').append(`<div class='word' id='word${i}'>Our row</div>`)
+                const words = wordArray[i];
+                const wordArray2 = Array.from(words);
             }
-            for (i = 0; i < len; i++) {
-                if (wordArray[i] === " ") {
-                    $('#main-game').append("<div class='divSpace'></div><br>")
-                } else {
-                    $('#main-game').append("<div class='div'></div>")
+
+            for (i = 0; i < words.length; i++) {
+                for (j = 0; j < words[i].length; j++) {
+                    $(`#word${i}`).append("_ ")
                 }
             }
+
             let lives = 7;
             $("header").text("Lives remaining: " + lives);
             $('body').keypress(function(event){ 
