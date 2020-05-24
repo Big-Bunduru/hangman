@@ -7,15 +7,17 @@ function game() {
             const data  = await response.json()
             const puzzleString = await data.puzzle.toLowerCase()
             console.log(puzzleString);
-            const len = puzzleString.length;
             const words = puzzleString.split(' ')
-            const wordArray = Array.from(puzzleString)
+            const wordsArray = Array.from(puzzleString)
             console.log(words)
             for (i = 0; i < words.length; i++) {
                 $('#main-game').append(`"<div class='word' id='word${i}'>"`)
+                const word = wordArray[i]
+                const wordArray = Array.from(word)
+                $('#main-game').append(`"<div class='word' id='word${i}'>"`)
             }
-            for (i = 0; i < len; i++) {
-                if (wordArray[i] === " ") {
+            for (i = 0; i < puzzleString.length; i++) {
+                if (wordsArray[i] === " ") {
                     $('#main-game').append("<div class='divSpace'></div><br>")
                 } else {
                     $('#main-game').append("<div class='div'></div>")
@@ -26,7 +28,7 @@ function game() {
             $('body').keypress(function(event){ 
                 var successFlag = false;
                 if (lives > 0) {
-                    for (i = 0; i < len; i++) {
+                    for (i = 0; i < puzzleString.length; i++) {
                         if(event.keyCode == puzzleString.charCodeAt(i)){
                             $("body").find("div").eq(i).text(puzzleString[i]);
                             success_flag = true;
