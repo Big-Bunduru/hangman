@@ -13,7 +13,7 @@ function game() {
             console.log(words)
             console.log(words.length)
             for (i = 0; i < words.length; i++) {
-                $('#main-game').append(`<div class='word' id='word${i}'>Our row</div>`)
+                $('#main-game').append(`<div class='word' id='word${i}'>My row</div>`)
                 const words = wordArray[i];
                 const wordArray2 = Array.from(words);
             }
