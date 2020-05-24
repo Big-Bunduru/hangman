@@ -12,9 +12,9 @@ function game() {
             console.log(words.length)
 
             for (i = 0; i < words.length; i++) {
-                $('#main-game').append(`<div class='word' id='word${i}'>Our row</div>`)
+                $('#main-game').append(`<div class='word' id='word${i}'>Our row: </div>`)
                 for (j = 0; j < words[i].length; j++) {
-                    $(`#word${i}`).append("_ ")
+                    $(`#word${i}`).append("<span class='div'></span>")
                 }
             }
 
@@ -25,8 +25,8 @@ function game() {
                 if (lives > 0) {
                     for (i = 0; i < puzzleString.length; i++) {
                         if(event.keyCode == puzzleString.charCodeAt(i)){
-                            $("body").find("div").eq(i).text(puzzleString[i]);
-                            success_flag = true;
+                            $("#main-game").find("span").eq(i).text(puzzleString[i]);
+                            successFlag = true;
                         }
                     }
                     if (!successFlag) {
