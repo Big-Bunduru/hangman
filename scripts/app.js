@@ -8,25 +8,20 @@ function game() {
             const puzzleString = await data.puzzle.toLowerCase()
             console.log(puzzleString);
             const words = puzzleString.split(' ')
-            const wordsArray = Array.from(puzzleString)
             console.log(words)
+            console.log(words.length)
+
             for (i = 0; i < words.length; i++) {
-                $('#main-game').append(`"<div class='word' id='word${i}'>"`)
-                const word = wordArray[i]
-                const wordArray = Array.from(word)
-                $('#main-game').append(`"<div class='word' id='word${i}'>"`)
-            }
-            for (i = 0; i < puzzleString.length; i++) {
-                if (wordsArray[i] === " ") {
-                    $('#main-game').append("<div class='divSpace'></div><br>")
-                } else {
-                    $('#main-game').append("<div class='div'></div>")
+                $('#main-game').append(`<div class='word' id='word${i}'>Our row</div>`)
+                for (j = 0; j < words[i].length; j++) {
+                    $(`#word${i}`).append("_ ")
                 }
             }
+
             let lives = 7;
             $("header").text("Lives remaining: " + lives);
             $('body').keypress(function(event){ 
-                var successFlag = false;
+                let successFlag = false;
                 if (lives > 0) {
                     for (i = 0; i < puzzleString.length; i++) {
                         if(event.keyCode == puzzleString.charCodeAt(i)){
