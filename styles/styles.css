@@ -5,6 +5,21 @@ div {
     float: left;
     border: 2px solid blue;
 }
+.divSpace {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    float: left;
+    border: 2px solid red;
+}
+div#main-game {
+    width: 600px;
+    height: 600px;
+    margin: 10px;
+    float: left;
+    border: 2px solid green;
+}
+}
 .blue {
     background: blue;
 }
