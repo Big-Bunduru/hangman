@@ -1,80 +1,46 @@
-var word_count = prompt("Enter word count:")
-
-const getPuzzle = async (wordCount) => {
-    const response = await fetch(`//puzzle.mead.io/puzzle?wordCount=${wordCount}`)
-    
-    if (response.status === 200) {
-        const puzzle  = await response.json()
-        console.log(puzzle.puzzle)
-        console.log(puzzle.puzzle.length)
-        return puzzle.puzzle
-    } else {
-        throw new Error('Unable to fetch puzzle')
-    }
-}
-
-const render = async (wordCount) => {
-    const puzzle = getPuzzle(wordCount).then((fetchedPuzzle) => {
-            var puzzleString = JSON.stringify(fetchedPuzzle)
-            return puzzleString
-        }).then((puzzleString) => {
-            var len = puzzleString.length
-            console.log(len)
-            return len
-        }).then((len) => {
+function game() {
+    var word_count = prompt("Enter word count:");
+    const getPuzzle = async (word_count) => {
+        const response = await fetch(`https://puzzle.mead.io/puzzle?wordCount=${word_count}`)
+        
+        if (response.status === 200) {
+            const data  = await response.json()
+            var puzzle_string = await data.puzzle
+            console.log(puzzle_string);
+            var len = puzzle_string.length;
             for (i = 0; i < len; i++) {
-                $('body').append("<div class='div'></div>").css('color', 'black')
-                //console.log(keyword[i])
-                //console.log(keyword.charCodeAt(i))
+                $('body').append("<div class='div'></div>").css('color', 'black');
             }
-            return len
-        }).then(() => {
+            var lives = 7;
+            $("header").text("Lives remaining: " + lives);
             $('body').keypress(function(event){ 
-                var success = false
-                //console.log(event.keyCode)
+                var success_flag = false;
                 if (lives > 0) {
                     for (i = 0; i < len; i++) {
-                        if(event.keyCode == keyword.charCodeAt(i)){
-                            $("body").find("div").eq(i).text(keyword[i])
-                            success = true
+                        if(event.keyCode == puzzle_string.charCodeAt(i)){
+                            $("body").find("div").eq(i).text(puzzle_string[i]);
+                            success_flag = true;
                         }
-                        //console.log(keyword.charCodeAt(i))
                     }
-                    if (!success) {
-                        lives--
-                        $("header").text("Lives remaining: " + lives)
+                    if (!success_flag) {
+                        lives--;
+                        $("header").text("Lives remaining: " + lives);
                     }
+                } else if (lives == 0) {
+                    $("header").text("Game Over    ");
+                    $('header').append('<button>Reset</button>')
+                    $("header").click(function(){
+                        location.reload();
+                    });
                 }
              })
-        })
-
-    console.log(puzzle)
-
-    var lives = 7
-
-    $('body').keypress(function(event){ 
-        var success = false
-        //console.log(event.keyCode)
-        if (lives > 0) {
-            for (i = 0; i < len; i++) {
-                if(event.keyCode == keyword.charCodeAt(i)){
-                    $("body").find("div").eq(i).text(keyword[i])
-                    success = true
-                }
-                //console.log(keyword.charCodeAt(i))
-            }
-            if (!success) {
-                lives--
-                $("header").text("Lives remaining: " + lives)
-            }
+        } else {
+            throw new Error('Unable to fetch puzzle')
         }
-     })
+    }
+    getPuzzle(word_count)
 }
 
-render(word_count)
-
-
-
-// This is the container for the actual game itself. 
-// In other words, this is where we set up the interface and read
-// user inputs/interactions. 
+$("button").click(function(){
+    game();
+});
