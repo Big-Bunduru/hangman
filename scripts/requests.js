@@ -9,6 +9,13 @@ const getPuzzle = async (wordCount) => {
     }
 }
 
+getPuzzle(2).PromiseValue
+
+console.log(getPuzzle(2))
+
+// const endpoint = "https://en.wikipedia.org/w/api.php?action=opensearch&search=Hello&format=json&origin=*";
+// fetch(endpoint).then(blob => console.log(blob.json()));
+
 // I'm using a puzzle generator set up by Andrew Mead for his JSBC course
 // 
 // This fn creates an async function called "getPuzzle" which takes "wordCount" 

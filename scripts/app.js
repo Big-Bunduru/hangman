@@ -1,3 +1,7 @@
+// let wordCountHC = 2
+// let puzzle22 = $.getJSON(`https://puzzle.mead.io/puzzle?wordCount=${wordCountHC}`)
+// console.log(puzzle22.responseText)
+
 function game() {
     
     // prompt for the number of words in puzzle
@@ -38,7 +42,7 @@ function game() {
 
             // main keypress logic
             $('body').keypress(function(event){
-
+                let guesses = []
                 // boolean flag if keystroke is in puzzle
                 let successFlag = false;
                 if (lives > 0) {
